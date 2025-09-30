@@ -1,0 +1,7 @@
+## Deploys a test nginx application to truenas
+services:
+  web:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "8088:80"
