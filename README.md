@@ -1,16 +1,16 @@
-# TrueNAS App Deployer Script Documentation
+# TrueNAS Compose CLI
 
 ## Overview
-This Python script automates the deployment and management of applications on a TrueNAS system using its API. The application can either be deployed from compose files or catalog files, depending on user input.
+This Python script automates the deployment and management of applications on a TrueNAS system using its API. The application can be deployed from compose files within a defined compose_dir.
 
 ## Installation
-No explicit installation steps are required beyond ensuring you have Python 3 installed and all dependencies met (imported in the script).
+No explicit installation steps are required beyond ensuring you have Python 3 installed and all dependencies met
 
 ## Usage
 
 ### Prerequisites
 1. **TrueNAS Environment**: A TrueNAS system with Docker Application service configured.
-2. **WSL Username/Password/API Key**: Necessary for authentication to access TrueNAS API.
+2. **Username/Password**: Necessary for authentication to access TrueNAS API.
 3. **Python 3.x**: Ensure Python is installed and the `argparse`, `json`, `os`, `time`, `pathlib`, `yaml`, and `truenas_api_client` packages are available.
 
 ### Instructions
@@ -21,7 +21,7 @@ No explicit installation steps are required beyond ensuring you have Python 3 in
 
 2. **Run the Script**:
     ```bash
-    python3 <script_name>.py --host <TrueNAS_HOST> [--user <Username>] [--compose_dir <COMPOSE_DIR>] [--catalog_dir <CATALOG_DIR>] [--dry-run]
+    python3 tn_compose_cli.py --host <TrueNAS_HOST> [--user <Username>] [--compose_dir <COMPOSE_DIR>] [--dry-run]
     ```
 
    - `--host`: The hostname or IP address of your TrueNAS instance.
@@ -32,8 +32,25 @@ No explicit installation steps are required beyond ensuring you have Python 3 in
 
 ### Example
 ```bash
-python3 app_deployer.py --host 192.168.1.100 --compose_dir /path/to/compose/files --catalog_dir /path/to/catalog/files --dry-run
+python3 tn_compose_cli.py --host 192.168.1.100 --compose_dir /path/to/compose/files --dry-run
 ```
+
+```bash
+python tn_compose_cli.py -h
+usage: tn_compose_cli.py [-h] --host HOST [--user USER] --compose_dir COMPOSE_DIR [--dry-run]
+
+Bootstrap TrueNAS apps from docker compose files.
+
+options:
+  -h, --help            show this help message and exit
+  --host HOST           Hostname/IP of TrueNAS host
+  --user USER           Username to login with. DEFAULT: 'admin'
+  --compose_dir COMPOSE_DIR
+                        Directory of compose files to deploy
+  --dry-run             Show actions without making changes
+```
+
+
 
 ```bash
 Please Enter your password:
@@ -42,3 +59,4 @@ Please Enter your password:
 [job 2960] RUNNING 70% - Updating docker resources
 [job 2960] SUCCESS 100% - Update completed for 'nginx'
 [job 2960] Finished.
+```
